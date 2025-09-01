@@ -54,7 +54,7 @@ def registration(request):
             first_name=first_name,
             last_name=last_name,
             password=password,
-            email=email
+            email=email,
         )
         login(request, user)
         return JsonResponse({"userName": username, "status": "Authenticated"})
