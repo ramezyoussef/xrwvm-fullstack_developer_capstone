@@ -1,5 +1,4 @@
 from .restapis import get_request, analyze_review_sentiments, post_review
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
 from django.http import JsonResponse
@@ -115,4 +114,6 @@ def add_review(request):
         return JsonResponse({"status": 200})
     except Exception as err:
         logger.error("Error posting review: %s", err)
-        return JsonResponse({"status": 401, "message": "Error in posting review"})
+        return JsonResponse
+        ({"status": 401, "message": "Error in posting review"}
+        )
