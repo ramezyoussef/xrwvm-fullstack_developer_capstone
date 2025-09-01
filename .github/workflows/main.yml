@@ -33,7 +33,7 @@ jobs:
       run: |
         pwd
 
-        find . -name "*.py" -exec flake* {} +
+        find . -name "*.py" -exec flake8 {} +
         echo "Linted all the python files successfully"
         
   lint_js:
