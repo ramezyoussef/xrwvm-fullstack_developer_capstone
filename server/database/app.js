@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+/* jshint esversion: 8 */
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -106,14 +107,14 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 
   const review = new Reviews({
 		"id": new_id,
-		"name": data['name'],
-		"dealership": data['dealership'],
-		"review": data['review'],
-		"purchase": data['purchase'],
-		"purchase_date": data['purchase_date'],
-		"car_make": data['car_make'],
-		"car_model": data['car_model'],
-		"car_year": data['car_year'],
+		"name": data.name,
+		"dealership": data.dealership,
+		"review": data.review,
+		"purchase": data.purchase,
+		"purchase_date": data.purchase_date,
+		"car_make": data.car_make,
+		"car_model": data.car_model,
+		"car_year": data.car_year,
 	});
 
   try {
