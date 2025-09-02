@@ -1,11 +1,13 @@
+/* jshint esversion: 6 */
+
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
-const  cors = require('cors')
-const app = express()
+const  cors = require('cors');
+const app = express();
 const port = 3030;
 
-app.use(cors())
+app.use(cors());
 app.use(require('body-parser').urlencoded({ extended: false }));
 
 const reviews_data = JSON.parse(fs.readFileSync("reviews.json", 'utf8'));
@@ -33,7 +35,7 @@ try {
 
 // Express route to home
 app.get('/', async (req, res) => {
-    res.send("Welcome to the Mongoose API")
+    res.send("Welcome to the Mongoose API");
 });
 
 // Express route to fetch all reviews
@@ -59,48 +61,48 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
     try{ const documents= await Dealerships.find();
-         res.json(documents) }
+         res.json(documents); }
     catch(error){ 
-        res.status(500).json({error: 'Error fetching dealerships'})} 
+        res.status(500).json({error: 'Error fetching dealerships'});} 
 });
 
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
 try{
-    const state =req.params.state
-    const documents=await Dealerships.find({state: state})
+    const state =req.params.state;
+    const documents=await Dealerships.find({state: state});
     if (documents.length > 0) {
-        res.json(documents)
+        res.json(documents);
     }else{
-        res.status(404).json({error:`Dealer with this state: ${state} not found`})
+        res.status(404).json({error:`Dealer with this state: ${state} not found`});
     }
 }
 catch(error){
-    res.status(500).json({error:`Error fetching dealer with id ${id}`})
+    res.status(500).json({error:`Error fetching dealer with id ${id}`});
 } 
 });
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
 try{
-    const id = parseInt(req.params.id)
-    const documents=await Dealerships.findOne({id:id})
+    const id = parseInt(req.params.id);
+    const documents=await Dealerships.findOne({id:id});
     if(documents){
-    res.json(documents)}
+    res.json(documents);}
     else{
-        res.status(404).json({error:`Dealer with id ${id} not found`})
+        res.status(404).json({error:`Dealer with id ${id} not found`});
     }
 
 }catch(error){
-    res.status(500).json({error:"Error fetching dealer with id"+id})
+    res.status(500).json({error:"Error fetching dealer with id"+id});
 }
 });
 
 //Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
-  const documents = await Reviews.find().sort( { id: -1 } )
-  let new_id = documents[0]['id']+1
+  const documents = await Reviews.find().sort( { id: -1 } );
+  let new_id = documents[0]['id']+1;
 
   const review = new Reviews({
 		"id": new_id,
